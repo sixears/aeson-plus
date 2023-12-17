@@ -1,31 +1,36 @@
+{-# LANGUAGE UnicodeSyntax #-}
 {-| Encapsulate a text error from aeson parsing -}
 module Data.Aeson.Error
-  ( AesonError, AsAesonError( _AesonError ), throwAsAesonError )
-where
+  ( AesonError
+  , AsAesonError(_AesonError)
+  , throwAsAesonError
+  ) where
 
 import Base1
 
 -- base --------------------------------
 
-import GHC.Generics  ( Generic )
+import GHC.Generics ( Generic )
 
 -- deepseq -----------------------------
 
-import Control.DeepSeq  ( NFData )
+import Control.DeepSeq ( NFData )
 
 -- text --------------------------------
 
-import Data.Text  ( Text )
+import Data.Text ( Text )
 
 -- text-printer ------------------------
 
-import qualified  Text.Printer  as  P
+import Text.Printer qualified as P
 
 --------------------------------------------------------------------------------
 
-{-| an error in cmdline calling args & options -}
-data AesonError = AesonError { _txt ∷ Text, _callstack ∷ CallStack }
-  deriving (Generic,NFData,Show)
+{-| an error in json(/yaml) parsing -}
+data AesonError = AesonError { _txt       :: Text
+                             , _callstack :: CallStack
+                             }
+  deriving (Generic, NFData, Show)
 
 ----------------------------------------
 
